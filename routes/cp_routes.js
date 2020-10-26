@@ -4,7 +4,7 @@ const Article = require("../models/cp-articles.model");
 
 router.route("/create-topic").post(async (req, res) => {
   const val = req.body;
-  console.log(val);
+  console.log(val.article);
   const yo = new Article(val);
   console.log(yo);
   try {
