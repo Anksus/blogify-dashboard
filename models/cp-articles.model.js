@@ -27,14 +27,13 @@ const articleSchema = new mongoose.Schema({
 });
 
 articleSchema.pre("validate", function (next) {
-  if (this.topic[0].docs[0].markdown) {
-    // console.log(this.topic.docs.markdown);
-    // console.log("-------------");
-    this.topic[0].docs[0].sanitizeHTML = domPurify.sanitize(
-      marked(this.topic[0].docs[0].markdown)
-    );
+  if (this.markdown) {
+    console.log(this.markdown);
+    this.sanitizeHTML = domPurify.sanitize(marked(this.markdown));
+    console.log(this.sanitizeHTML);
   }
   next();
 });
+
 const Article = mongoose.model("Article", articleSchema);
 module.exports = Article;

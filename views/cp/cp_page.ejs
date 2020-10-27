@@ -31,15 +31,24 @@
         <div class="col-sm-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Chapters</h5>
-              <% lols.forEach(a=>{ %>
+              <h5 class="card-title"><b>CHAPTERS</b></h5>
+              <% data.forEach(a=>{ %>
               <ul>
-                <li><%= a %></li>
+                <li><b> <%= a.topic %></b></li>
+                <% a.subTopic.forEach((aa)=>{ %>
+
+                <ul>
+                  <li><%= aa.name %></li>
+                </ul>
+                <% }) %>
               </ul>
 
               <% }) %>
               <a href="/cp/create-topic" class="btn btn-primary"
                 >Add new Chapter</a
+              >
+              <a href="/cp/create-subtopic" class="btn btn-primary"
+                >Add new Subchapter</a
               >
             </div>
           </div>
@@ -47,17 +56,20 @@
         <div class="col-sm-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
+              <h5 class="card-title" style="color: #03071e">
+                <b>CREATE NEW ARTICLE</b>
+              </h5>
               <p class="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                Write article here. It is Markdown supported. So, be nice and
+                use it!
               </p>
-              <a href="cp/create-topic" class="btn btn-primary">Go somewhere</a>
+              <a href="cp/create-article" class="btn btn-primary"
+                >Let's write</a
+              >
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- <div class="container"><%- include('_forms') %></div> -->
   </body>
 </html>

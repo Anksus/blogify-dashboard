@@ -4,13 +4,16 @@ const mongoose = require("mongoose");
 const algoRouter = require("./routes/cp_routes");
 require("dotenv").config();
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 app.use(cors());
-app.use(express.json());
-app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: true }));
 
+// app.use(express.json());
+app.set("view engine", "ejs");
+const LOCAL = "mongodb://localhost/local-testing-blogify";
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, {
+mongoose.connect(LOCAL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
