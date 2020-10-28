@@ -7,11 +7,9 @@ const domPurify = createDompurify(new JSDOM().window);
 const articleSchema = new mongoose.Schema({
   topic: {
     type: String,
-    unique: true,
   },
   subTopicName: {
     type: String,
-    unique: true,
   },
   articleName: {
     type: String,
@@ -28,9 +26,7 @@ const articleSchema = new mongoose.Schema({
 
 articleSchema.pre("validate", function (next) {
   if (this.markdown) {
-    console.log(this.markdown);
     this.sanitizeHTML = domPurify.sanitize(marked(this.markdown));
-    console.log(this.sanitizeHTML);
   }
   next();
 });
