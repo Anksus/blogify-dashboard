@@ -3,6 +3,7 @@ const router = express.Router();
 const Article = require("../models/cp-articles.model");
 const Topic = require("../models/cp-topics.model");
 
+// NOTE: API TO CREATE TOPIC
 router.route("/create-topic").post(async (req, res) => {
   const topic = new Topic({
     topic: req.body.topic,
@@ -15,6 +16,7 @@ router.route("/create-topic").post(async (req, res) => {
   }
 });
 
+// NOTE: API TO CRAETE SUBTOPIC
 router.post("/create-subtopic", async (req, res) => {
   try {
     await Topic.findOneAndUpdate(
@@ -33,6 +35,7 @@ router.post("/create-subtopic", async (req, res) => {
   res.send("done");
 });
 
+// NOTE: API TO FETCH ALL THE TOPICS
 router.get("/create-subtopic", async (req, res) => {
   try {
     const topics = await Topic.find().select({ topic: -1 }).exec();
@@ -44,13 +47,7 @@ router.get("/create-subtopic", async (req, res) => {
   res.send("done");
 });
 
-// For frontend api route
-router.get("/all-topics", async (req, res) => {});
-
-// router.route("/create-topic").get(async (req, res) => {
-//   res.render("cp/_form_topic");
-// });
-
+// NOTE: API TO GET DATA OF TOPICS AND SUBTOPICS AND RENDERING THEM OVER HTML
 router.route("/").get(async (req, res) => {
   try {
     const allTopics = await Topic.find();
@@ -60,10 +57,12 @@ router.route("/").get(async (req, res) => {
   }
 });
 
+// NOTE: API TO RENDER CREATE-TOPIC HTML
 router.route("/create-topic").get((req, res) => {
   res.render("cp/create-topic");
 });
 
+// NOTE:// API TO RENDER CREATE-ARTICLE HTML WITH FETCHED TOPICS AND SUBTOPICS
 router.route("/create-article").get(async (req, res) => {
   try {
     const topics = await Topic.find().select({ topic: -1 });
@@ -73,7 +72,20 @@ router.route("/create-article").get(async (req, res) => {
   }
 });
 
-router.route("/create-article").post((req, res) => {});
-// router.route("/add-article");
+// NOTE: API TO POST NEW ARTICLE TO DATABASE
+router.route("/create-article").post(async (req, res) => {
+  const newArticle = new Article({
+    topic: req.body.topic,
+    subTopicName: req.body.subTopicName,
+    articleName: req.body.articleName,
+    markdown: req.body.markdown,
+  });
+  try {
+    await newArticle.save();
+    res.send("done");
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
 
 module.exports = router;

@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(express.json());
+app.use(express.json());
 app.set("view engine", "ejs");
 const LOCAL = "mongodb://localhost/local-testing-blogify";
 const uri = process.env.ATLAS_URI;
