@@ -29,7 +29,12 @@
     <div class="container" style="margin-top: 20px">
       <form action="/cp/create-article" method="POST">
         <div class="form-group">
-          <select name="topic" class="form-control" style="margin-bottom: 10px">
+          <select
+            id="1stSelect"
+            name="topic"
+            class="form-control"
+            style="margin-bottom: 10px"
+          >
             <% data.forEach((t)=>{ %>
             <option><%= t.topic %></option>
             <% }) %>

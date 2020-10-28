@@ -26,7 +26,7 @@ router.post("/create-subtopic", async (req, res) => {
           subTopic: { name: req.body.name },
         },
       }
-    );
+    ).exec();
     res.redirect("/cp");
   } catch (error) {
     res.status(401).send(error);
@@ -43,14 +43,12 @@ router.get("/create-subtopic", async (req, res) => {
   } catch (error) {
     res.status(401).send(error);
   }
-
-  res.send("done");
 });
 
 // NOTE: API TO GET DATA OF TOPICS AND SUBTOPICS AND RENDERING THEM OVER HTML
 router.route("/").get(async (req, res) => {
   try {
-    const allTopics = await Topic.find();
+    const allTopics = await Topic.find().exec();
     res.render("cp/cp_page", { data: allTopics });
   } catch (error) {
     res.status(400).send(error);
@@ -65,7 +63,7 @@ router.route("/create-topic").get((req, res) => {
 // NOTE:// API TO RENDER CREATE-ARTICLE HTML WITH FETCHED TOPICS AND SUBTOPICS
 router.route("/create-article").get(async (req, res) => {
   try {
-    const topics = await Topic.find().select({ topic: -1 });
+    const topics = await Topic.find().select({ topic: -1 }).exec();
     res.render("cp/create-article", { data: topics });
   } catch (error) {
     res.status(400).send(error);

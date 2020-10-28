@@ -7,13 +7,16 @@ const domPurify = createDompurify(new JSDOM().window);
 const articleSchema = new mongoose.Schema({
   topic: {
     type: String,
+    trim: true,
   },
   subTopicName: {
     type: String,
+    trim: true,
   },
   articleName: {
     type: String,
     unique: true,
+    trim: true,
   },
   markdown: {
     type: String,

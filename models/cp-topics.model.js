@@ -5,11 +5,13 @@ const topicSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+    trim: true,
   },
   subTopic: [
     {
       name: {
         type: String,
+        trim: true,
       },
     },
   ],

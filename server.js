@@ -13,7 +13,7 @@ app.use(express.json());
 app.set("view engine", "ejs");
 const LOCAL = "mongodb://localhost/local-testing-blogify";
 const uri = process.env.ATLAS_URI;
-mongoose.connect(LOCAL, {
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -30,13 +30,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/cp", algoRouter);
-
-// const student = mongoose.Schema({
-//   firstname: String,
-// });
-// const Student = mongoose.model("Student", student);
-
-// Student.create({ firstname: "ankit" });
 
 app.listen(port, () => {
   console.log(`server listening somewhere on port ${port}`);
